@@ -8,7 +8,7 @@ class NotInLibraryException(Exception):
 class BlockLibrary():
     """Manages block_library"""
 
-    def add_block(self):
+    def add_block(self, block):
         pass
 
     def get_block(self, block):
