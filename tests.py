@@ -34,6 +34,17 @@ class BlockLibraryTest(TestCase):
         self.assertIn('__call__', dir(self.register.get_block('blocks.tests.foo_block')), 'BlockLibrary.get_block should return a function')
         self.assertIs(self.register.get_block('blocks.tests.foo_block'), foo_block, 'BlockLibrary.get_block should return foo_block')
 
+    def test_get_blocks(self):
+        """
+        Tests that BlockLibrary returns the library
+        """
+        self.register.add_block(foo_block)
+        self.register.add_block(another_foo_block)
+        the_library = self.register.get_blocks()
+        self.assertEqual(len(the_library), 2, 'the_library length shoud be 2')
+        self.assertIn('blocks.tests.foo_block', the_library, 'blocks.tests.foo should be in the_library')
+        self.assertIn('blocks.tests.another_foo_block', the_library, 'blocks.tests.another_foo_block should be in the_library')
+
     def test_get_block_not_in_library(self):
         """
         Tests that if given block is not in the library raises a NotInLibraryExcetpion
