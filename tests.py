@@ -1,4 +1,5 @@
 from django.test import TestCase
+from blocks import BlockLibrary, NotInLibraryException
 
 
 def foo_block():
