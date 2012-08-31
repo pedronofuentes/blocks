@@ -47,9 +47,9 @@ class BlockLibraryTest(TestCase):
 
     def test_get_block_not_in_library(self):
         """
-        Tests that if given block is not in the library raises a NotInLibraryExcetpion
+        Tests that if given block is not in the library raises a NotInLibraryException
         """
-        self.assertRaisesRegexp(NotInLibraryExcetpion, 'foo.blocks.a_block is not in the library', self.block_library.get_block('foo.blocks.a_block'))
+        self.assertRaisesRegexp(NotInLibraryException, 'foo.blocks.a_block is not in the library', self.block_library.get_block('foo.blocks.a_block'))
 
     def test_remove_all_blocks(self):
         """
@@ -77,6 +77,6 @@ class BlockLibraryTest(TestCase):
 
     def test_remove_block_not_in_library(self):
         """
-        Tests that if the block wanted to remove is not in the library raises a NotInLibraryExcetpion
+        Tests that if the block wanted to remove is not in the library raises a NotInLibraryException
         """
-        self.assertRaisesRegexp(NotInLibraryExcetpion, 'foo.blocks.a_block is not in the library', self.block_library.remove_block('foo.blocks.a_block'))
+        self.assertRaisesRegexp(NotInLibraryException, 'foo.blocks.a_block is not in the library', self.block_library.remove_block('foo.blocks.a_block'))
