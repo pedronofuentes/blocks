@@ -83,3 +83,12 @@ class BlockLibraryTest(TestCase):
         self.assertIn('blocks.blocks.foo_block', self.block_library.get_blocks(), 'blocks.blocks.foo_block key should be in the library dictionary')
         self.assertIn('blocks.blocks.another_foo_block', self.block_library.get_blocks(), 'blocks.blocks.another_foo_block key should be in the library dictionary')
         self.assertIn('blocks.blocks.render_content_foo_block', self.block_library.get_blocks(), 'blocks.blocks.render_content_foo_block key should be in the library dictionary')
+
+    def test_empty_library(self):
+        """
+        Tests BlockLibrary's is_empty method
+        """
+        self.assertTrue(self.block_library.is_empty(), 'is_empty should return True with no blocks added')
+        self.block_library.add_block(foo_block)
+        self.assertFalse(self.block_library.is_empty(), 'is_empty should return False with a block in the library')
+
