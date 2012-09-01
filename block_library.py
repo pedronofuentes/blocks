@@ -36,9 +36,9 @@ class BlockLibrary():
         for key in block_library.keys():
             del block_library[key]
 
-    def autodiscover(self, apps=settings.INSTALLED_APPS):
-        for app in apps:
-            if not re.match('[django.*|blocks]', app):
+    def autodiscover(self):
+        for app in settings.INSTALLED_APPS:
+            if not re.match('[django\..*]', app):
                 try:
                     mod = import_module(app)
                 except ImportError as e:
