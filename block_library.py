@@ -48,3 +48,6 @@ class BlockLibrary():
                     for x in dir(block_module):
                         if callable(getattr(block_module, x)) and re.match(r'.*_block', x):
                             self.add_block(getattr(block_module, x))
+
+    def is_empty(self):
+        return False if block_library else True
