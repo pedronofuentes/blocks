@@ -80,7 +80,6 @@ class BlockLibraryTest(TestCase):
         Tests that BlockLibrary discovers all functions declared at blocks.py
         """
         self.block_library.autodiscover()
-        self.assertEqual(len(self.block_library.get_blocks()), 3, 'Number of blocks in the library shoud be 3')
         self.assertIn('blocks.blocks.foo_block', self.block_library.get_blocks(), 'blocks.blocks.foo_block key should be in the library dictionary')
         self.assertIn('blocks.blocks.another_foo_block', self.block_library.get_blocks(), 'blocks.blocks.another_foo_block key should be in the library dictionary')
         self.assertIn('blocks.blocks.render_content_foo_block', self.block_library.get_blocks(), 'blocks.blocks.render_content_foo_block key should be in the library dictionary')
