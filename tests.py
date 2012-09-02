@@ -115,3 +115,11 @@ class BlockTagsTest(TestCase):
             '{% get_block_with_arg "blocks.blocks.render_content_with_arg_foo_block" "Anne" %}'
         )
         self.assertEqual(t2.render(c), 'Hello Anne!')
+
+    def test_block_not_in_library(self):
+        t = Template(
+            '{% load block_tags %}'
+            '{% get_block "blocks.blocks.not_in_library_foo_block" %}'
+        )
+        c = Context({})
+        self.assertEqual(t.render(c), '')
