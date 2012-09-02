@@ -37,17 +37,18 @@ class BlockLibrary():
             del block_library[key]
 
     def autodiscover(self):
-        for app in settings.INSTALLED_APPS:
-            if not re.match('[django\..*]', app):
-                try:
-                    mod = import_module(app)
-                except ImportError as e:
-                    raise ImproperlyConfigured('ImportError %s: %s' % (app, e.args[0]))
-                if os.path.isfile(os.path.join(os.path.dirname(mod.__file__), 'blocks.py')):
-                    block_module = import_module('%s.%s' % (app, 'blocks'))
-                    for x in dir(block_module):
-                        if callable(getattr(block_module, x)) and re.match(r'.*_block', x):
-                            self.add_block(getattr(block_module, x))
+        if self.is_empty():
+            for app in settings.INSTALLED_APPS:
+                if not re.match('[django\..*]', app):
+                    try:
+                        mod = import_module(app)
+                    except ImportError as e:
+                        raise ImproperlyConfigured('ImportError %s: %s' % (app, e.args[0]))
+                    if os.path.isfile(os.path.join(os.path.dirname(mod.__file__), 'blocks.py')):
+                        block_module = import_module('%s.%s' % (app, 'blocks'))
+                        for x in dir(block_module):
+                            if callable(getattr(block_module, x)) and re.match(r'.*_block', x):
+                                self.add_block(getattr(block_module, x))
 
     def is_empty(self):
         return False if block_library else True
