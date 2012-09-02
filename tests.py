@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.template import Template, Context
 from block_library import BlockLibrary, NotInLibraryException
 from blocks import foo_block, another_foo_block
 
@@ -92,3 +93,12 @@ class BlockLibraryTest(TestCase):
         self.block_library.add_block(foo_block)
         self.assertFalse(self.block_library.is_empty(), 'is_empty should return False with a block in the library')
 
+
+class BlockTagsTest(TestCase):
+    def test_get_block_tag(self):
+        t = Template(
+            '{% load block_tags %}'
+            '{% get_block "blocks.blocks.render_content_foo_block" %}'
+        )
+        c = Context({})
+        self.assertEqual(t.render(c), 'Hello World!')
