@@ -102,3 +102,16 @@ class BlockTagsTest(TestCase):
         )
         c = Context({})
         self.assertEqual(t.render(c), 'Hello World!')
+
+    def test_get_block_with_arg(self):
+        t1 = Template(
+            '{% load block_tags %}'
+            '{% get_block_with_arg "blocks.blocks.render_content_with_arg_foo_block" "John" %}'
+        )
+        c = Context({})
+        self.assertEqual(t1.render(c), 'Hello John!')
+        t2 = Template(
+            '{% load block_tags %}'
+            '{% get_block_with_arg "blocks.blocks.render_content_with_arg_foo_block" "Anne" %}'
+        )
+        self.assertEqual(t2.render(c), 'Hello Anne!')
